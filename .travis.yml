@@ -1,0 +1,43 @@
+sudo: false
+language: php
+
+php:
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
+
+matrix:
+  include:
+    # Test against LTS releases
+    - php: 5.5
+      env: SYMFONY_VERSION='2.3.*'
+    # Test against dev dependencies
+    - php: 5.6
+      env: DEPS=dev
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: hhvm
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+
+before_install:
+  - composer self-update
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/symfony=$SYMFONY_VERSION; fi;
+  - if [ "$DEPS" = 'dev' ]; then perl -pi -e 's/^}$/,"minimum-stability":"dev"}/' composer.json; fi;
+
+install:
+  - composer install --no-progress
+
+before_script:
+  - export PATH=./bin:$PATH
+
+script:
+  - phpspec run -f pretty --no-interaction
+  - behat --strict -c tests/behat.yml.dist -p file
+  - behat --strict -c tests/behat.yml.dist -p class

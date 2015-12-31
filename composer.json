@@ -1,0 +1,37 @@
+{
+    "name": "tabbi89/behat-silex-extension",
+    "type": "library",
+    "description": "Behat extension for silex",
+    "keywords": ["behat", "silex", "bdd"],
+    "homepage": "http://github.com/tabbi89/behat-silex-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tabbi89",
+            "email": "tom@tabbi89.com",
+            "homepage": "http://tabbi89.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.9",
+        "silex/silex": "^1.2,>=1.2",
+        "behat/behat": "~3.0,>=3.0.4"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "require-dev": {
+        "behat/mink": "~1.7",
+        "behat/mink-extension": "~2.1",
+        "behat/mink-browserkit-driver": "~1.3",
+        "phpspec/phpspec": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tabbi89\\Behat\\SilexExtension\\": "src/Tabbi89/Behat/SilexExtension"
+        }
+    },
+    "autoload-dev": {
+        "psr-4" : { "Tabbi89\\Behat\\SilexExtension\\Tests\\TestApp\\" : "tests" }
+    }
+}

@@ -1,0 +1,26 @@
+default:
+    extensions:
+        Behat\MinkExtension:
+            base_url:  'http://test.dev'
+            default_session: silex
+            sessions:
+                silex:
+                    silex: ~
+
+class:
+    extensions:
+        Tabbi89\Behat\SilexExtension:
+            kernel:
+                class: Tabbi89\Behat\SilexExtension\Tests\TestApp\app\Application
+        Behat\MinkExtension:
+            base_url:  'http://test.dev'
+            default_session: silex
+            sessions:
+                silex:
+                    silex: ~
+
+file:
+    extensions:
+        Tabbi89\Behat\SilexExtension:
+            kernel:
+                path: app/app.php
